@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Click Game</title>
+	
+	<link rel="stylesheet" type="text/css" href="click.css">
+	<script type="text/javascript">
+	
+		function countDown(secs, elem){
+		var element = document.getElementById(elem);
+		element.innerHTML = secs ;
+		var k = i-j;
+		if(secs < 1){
+			clearTimeout(timer);
+			
+			document.getElementById("name").innerHTML = "Your Score:"+k;
+			
+			document.getElementById("button").style.display = "none";
+			document.getElementById("sqr").style.display = "none";
+			document.getElementById("crl").style.display = "none";
+			document.getElementById("tri").style.display = "none";
+			
+			document.getElementById("excellent").innerHTML = "Excellent -";
+			document.getElementById("exd").innerHTML = "70 and Above";
+			document.getElementById("vgood").innerHTML = "Very Good -";
+			document.getElementById("vgd").innerHTML = "60 - 69";
+			document.getElementById("good").innerHTML = "Good -";
+			document.getElementById("gd").innerHTML = "50 - 59";
+			document.getElementById("avg").innerHTML = "Average -";
+			document.getElementById("avd").innerHTML = "35 - 49";
+			document.getElementById("bad").innerHTML = "Bad -";
+			document.getElementById("bd").innerHTML = "20 - 34";
+			document.getElementById("vbad").innerHTML = "Very Bad -";
+			document.getElementById("vbd").innerHTML = "19 and Below";
+			
+			if(k >= 70){
+				element.innerHTML= '<h2>Excellent! You did a good job.</h2>';
+			}else if(k < 70 && k >=60){
+				element.innerHTML= '<h2>Very Good! Good effort but still you can aim big.</h2>';
+			} else if(k < 60 && k >=50){
+				element.innerHTML= '<h2>Good! Its just above the line performance, but not an high class one.</h2>';
+			} else if(k < 50 && k >=35){
+				element.innerHTML= '<h2>Average! Its an ordinary performance.</h2>';
+			} else if(k < 35 && k >=20){
+				element.innerHTML= '<h2>Bad! Below par performance.</h2>';
+			} else{
+				element.innerHTML= '<h2>Very Bad! thats a very poor attempt.</h2>';
+			}
+			
+			}
+        
+		secs--;
+		var timer = setTimeout('countDown('+secs+', "'+elem+'")', 1000);
+		}
+		document.getElementById("button").onClick= "myFunction()";
+		
+		function figure(){
+			var rand = Math.random();
+			var ran = rand * 3000;
+			var sq = "SQUARE";
+			var cr = "CIRCLE";
+			var tr = "TRIANGLE";
+			
+			if(ran<= 1000){
+				document.getElementById("name").innerHTML = sq;
+			} else if(ran > 2000){
+				document.getElementById("name").innerHTML = tr;
+			} else {
+				document.getElementById("name").innerHTML = cr;
+			} 
+			
+			if(document.getElementById("name").innerHTML == sq){
+			
+				document.getElementById("sqr").onclick = function() {
+					i=i+1;
+					document.getElementById("correct").innerHTML = i;
+					figure();
+				};
+				document.getElementById("crl").onclick = function() {
+					j=j+1;
+					document.getElementById("wrong").innerHTML = j;
+					figure();
+				};
+				document.getElementById("tri").onclick = function() {
+					j=j+1;
+					document.getElementById("wrong").innerHTML = j;
+					figure();
+				};
+			} else if(document.getElementById("name").innerHTML == cr){
+			
+				document.getElementById("crl").onclick = function() {
+					i=i+1;
+					document.getElementById("correct").innerHTML = i;
+					figure();
+				};
+				document.getElementById("sqr").onclick = function() {
+					j=j+1;
+					document.getElementById("wrong").innerHTML = j;
+					figure();
+				};
+				document.getElementById("tri").onclick = function() {
+					j=j+1;
+					document.getElementById("wrong").innerHTML = j;
+					figure();
+				};
+			}else if(document.getElementById("name").innerHTML == tr){
+				document.getElementById("tri").onclick = function() {
+					i=i+1;
+					document.getElementById("correct").innerHTML = i;
+					figure();
+				};
+				document.getElementById("crl").onclick = function() {
+					j=j+1;
+					document.getElementById("wrong").innerHTML = j;
+					figure();
+				};
+				document.getElementById("sqr").onclick = function() {
+					j=j+1;
+					document.getElementById("wrong").innerHTML = j;
+					figure();
+				};
+			}
+			
+			document.getElementById("score").innerHTML= i-j;
+		}
+		
+		
+	</script> 
+	
+	
+</head>
+<body id="body">
+	<div id="main">
+		<h1 id="title">Welcome to Click Game!</h1>
+		<button id="button" onclick="myFunction()">Click here to start the game!</button>
+		<p>No. of correct clicks:<span id="correct"><span></p>
+		<p>No. of wrong clicks:<span id="wrong"><span></p>
+		<p>Time remaining:<span id="time"><span></p>
+		<h2 id="name"></h2>
+		<table id="table">
+			<tr><td id="excellent"></td><td id="exd"></td></tr>
+			<tr><td id="vgood"></td><td id="vgd"></td></tr>
+			<tr><td id="good"></td><td id="gd"></td></tr>
+			<tr><td id="avg"></td><td id="avd"></td></tr>
+			<tr><td id="bad"></td><td id="bd"></td></tr>
+			<tr><td id="vbad"></td><td id="vbd"></td></tr>
+		</table>
+		<div class="fig">
+			<div id="sqr"></div>
+			<div id="crl"></div>
+			<div id="tri"></div>
+		</div><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+		
+	
+	</div>
+	
+	<script type="text/javascript">
+		function myFunction(){
+			document.getElementById("button").innerHTML= "Game started!";
+			countDown(60, "time");
+			figure();
+			
+		document.getElementById("correct").innerHTML= 0;
+		document.getElementById("wrong").innerHTML= 0;
+		};
+		
+		var i=0;
+		var j=0;
+		document.getElementById("correct").innerHTML= i;
+		document.getElementById("wrong").innerHTML= j;
+		
+	</script>
+	
+</body>
